@@ -57,7 +57,7 @@ module SimplePing
     def checksum
       # Divide into 16 bits
       # ex: ["pi", "ng"]
-      data_arr = @data.scan(/.{1,#{2}}/)
+      data_arr = @data.scan(/.{1,2}/)
       # Calculate each ASCII code
       # ex: [28777, 28263]
       data_arr_int = data_arr.map do |data|
