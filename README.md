@@ -15,3 +15,6 @@ ping_client.exec(dest_ip_addr: "192.168.1.101")
 - Timeout Seconds: 10s
 - Does not support retries
 - Confirmed the operation with Ruby 2.7.1
+
+# License
+MIT
