@@ -1,6 +1,12 @@
 module SimplePing
   class ICMP
-    attr_reader :id, :seq_number
+    attr_accessor :id, :seq_number, :data, :type
+
+    # ICMP TYPES
+    TYPE_ICMP_ECHO_REPLY = 0x00
+    TYPE_ICMP_DESTINATION_UNREACHABLE = 0x03
+    TYPE_ICMP_REDIRECT = 0x05
+    TYPE_ICMP_ECHO_REQUEST = 0x08
 
     # constructor
     #
@@ -9,13 +15,41 @@ module SimplePing
     # @param id         [Integer] 0x01
     # @param seq_number [Integer] 0x01
     # @param data        [String] 0x01
-    def initialize(code:, type:, id: nil, seq_number: nil, data: nil)
-      @code = code
+    def initialize(type:, code: 0, id: nil, seq_number: nil, data: nil)
       @type = type
+      @code = code
       @id = id || gen_id
       @seq_number = seq_number || gen_seq_number
       @data = data || gen_data
       @checksum = checksum
+    end
+
+    # @return [Boolean]
+    def is_type_redirect?
+      @type == TYPE_ICMP_REDIRECT
+    end
+
+    # @return [Boolean]
+    def is_type_echo?
+      @type == TYPE_ICMP_ECHO_REPLY || @type == TYPE_ICMP_ECHO_REQUEST
+    end
+
+    # @return [Boolean]
+    def is_type_echo_reply?
+      @type == TYPE_ICMP_ECHO_REPLY
+    end
+
+    # @return [Boolean]
+    def is_type_destination_unreachable?
+      @type == TYPE_ICMP_DESTINATION_UNREACHABLE
+    end
+
+    # Whether the argument ICMP is a reply of this ICMP
+    #
+    # @param [ICMP]
+    # @return [Boolean]
+    def successful_reply?(icmp)
+      icmp.id == @id && icmp.seq_number == @seq_number && icmp.is_type_echo_reply?
     end
 
     # Return the data format for sending with the Socket::send method
