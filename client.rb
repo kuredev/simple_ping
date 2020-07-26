@@ -57,7 +57,7 @@ module SimplePing
           end
         end
       rescue Timeout::Error => e
-        logger.warn { "Timeout Occured! #{e}" }
+        logger.warn { "Timeout Occurred! #{e}" }
         false
       end
     end
