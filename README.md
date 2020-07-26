@@ -1,10 +1,13 @@
 # Overview
 A Simpe Ping(ICMP) Client for Ruby.
+https://rubygems.org/gems/simple_ping
 
 # How to use
 ※ Need root privileges to run.
 
 ```ruby
+require "simple_ping"
+
 ping_client = SimplePing::Client.new(src_ip_addr: "192.168.1.100")
 ping_client.exec(dest_ip_addr: "192.168.1.101")
 ```
