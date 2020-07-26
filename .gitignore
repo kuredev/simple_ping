@@ -6,6 +6,10 @@
 /pkg/
 /spec/reports/
 /tmp/
+/vendor/*
 
 # rspec failure tracking
 .rspec_status
+test2.rb
+test.rb
+Gemfile.lock
