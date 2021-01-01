@@ -64,7 +64,7 @@ class SimplePing::ICMP
       @seq_number.to_s(2).rjust(16, "0")
 
     data_byte_arr = bynary_data.scan(/.{1,8}/)
-    data_byte_arr.map! { |byte| byte.to_i(2).chr }
+    data_byte_arr.map! { |byte| byte.to_i(2).chr } # TO ASCII
     data_byte_arr.join + @data
   end
 
