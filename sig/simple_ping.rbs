@@ -1,0 +1,94 @@
+module SimplePing
+end
+
+class SimplePing::Client
+  public
+
+  def exec: (dest_ip_addr: untyped, ?data: untyped) -> untyped
+
+  private
+
+  def initialize: (src_ip_addr: String, ?log_level: Integer) -> void
+
+  def logger: () -> untyped
+
+  def socket: () -> untyped
+end
+
+SimplePing::Client::TIMEOUT_TIME: Integer
+
+class SimplePing::ICMP
+  public
+
+  def data: () -> untyped
+
+  def data=: (untyped) -> untyped
+
+  def id: () -> untyped
+
+  def id=: (untyped) -> untyped
+
+  def is_type_destination_unreachable?: () -> untyped
+
+  def is_type_echo?: () -> untyped
+
+  def is_type_echo_reply?: () -> untyped
+
+  def is_type_redirect?: () -> untyped
+
+  def seq_number: () -> untyped
+
+  def seq_number=: (untyped) -> untyped
+
+  def successful_reply?: (untyped icmp) -> untyped
+
+  def to_trans_data: () -> untyped
+
+  def type: () -> untyped
+
+  def type=: (untyped) -> untyped
+
+  private
+
+  def carry_up: (untyped num) -> untyped
+
+  def checksum: () -> untyped
+
+  def gen_data: () -> untyped
+
+  def gen_id: () -> untyped
+
+  def gen_seq_number: () -> untyped
+
+  def initialize: (type: untyped, ?code: untyped, ?id: untyped, ?seq_number: untyped, ?data: untyped) -> untyped
+end
+
+SimplePing::ICMP::TYPE_ICMP_DESTINATION_UNREACHABLE: Integer
+
+SimplePing::ICMP::TYPE_ICMP_ECHO_REPLY: Integer
+
+SimplePing::ICMP::TYPE_ICMP_ECHO_REQUEST: Integer
+
+SimplePing::ICMP::TYPE_ICMP_REDIRECT: Integer
+
+class SimplePing::RecvMessage
+  public
+
+  def code: () -> untyped
+
+  def data: () -> untyped
+
+  def id: () -> untyped
+
+  def seq_number: () -> untyped
+
+  def to_icmp: () -> untyped
+
+  def type: () -> untyped
+
+  private
+
+  def initialize: (untyped mesg) -> untyped
+end
+
+SimplePing::VERSION: String
