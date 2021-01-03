@@ -4,7 +4,7 @@ end
 class SimplePing::Client
   public
 
-  def exec: (dest_ip_addr: untyped, ?data: untyped) -> untyped
+  def exec: (dest_ip_addr: String, ?data: String) -> bool
 
   private
 
