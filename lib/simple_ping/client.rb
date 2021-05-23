@@ -40,17 +40,19 @@ class SimplePing::Client
     # Receive
     begin
       Timeout.timeout(TIMEOUT_TIME) do
-        mesg, _ = socket.recvfrom(1500)
-        icmp_reply = SimplePing::RecvMessage.new(mesg).to_icmp
+        loop do
+          mesg, _ = socket.recvfrom(1500)
+          icmp_reply = SimplePing::RecvMessage.new(mesg).to_icmp
 
-        if icmp.successful_reply?(icmp_reply)
-          true
-        elsif icmp_reply.is_type_destination_unreachable?
-          logger.warn { "Destination Unreachable!!" }
-          false
-        elsif icmp_reply.is_type_redirect?
-          logger.warn { "Redirect Required!!" }
-          false
+          if icmp.successful_reply?(icmp_reply)
+            return true
+          elsif icmp_reply.is_type_destination_unreachable?
+            logger.warn { "Destination Unreachable!!" }
+            return false
+          elsif icmp_reply.is_type_redirect?
+            logger.warn { "Redirect Required!!" }
+            return false
+          end
         end
       end
     rescue Timeout::Error => e
